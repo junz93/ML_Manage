@@ -1,0 +1,4 @@
+{
+"topic_sub":["all:DCCP-4_up"],
+"topic_pub":["all:DCCP-4_down"]
+}

@@ -1,0 +1,26 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plot</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+  </head>
+<body>
+<div class="container">
+  <canvas id="myChart" width="1200" height="430"></canvas>
+  <div style="margin:20px">
+  </div>
+  <span style="margin:40px">
+    <input type="button" class="btn btn-primary" name="stop" id="stop" value="结束调用">
+  </span>
+</div>
+<script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/Chart.js' %}"></script>
+<script src="{% static 'js/plot.js' %}"></script>
+</body>
+</html>

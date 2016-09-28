@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Mon Mar 04 15:28:56 CST 2013
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=CommonWsnSubscribe.jar
+manifest.mergeall=true
+manifest.mainclass=com.common.subscribe.singleSubscribe
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

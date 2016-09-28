@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Dec 26 15:40:49 CST 2012
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=AlarmTest-166.237-1-synThread.jar
+manifest.mergeall=true
+manifest.mainclass=com.alarm.notify.alarmNotify
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

@@ -1,0 +1,14 @@
+<script type="text/javascript">
+	var type = "{{ type }}";
+	switch(type){
+		case "delete":
+			alert("删除成功！");
+			window.location.href = "{% url 'dl_manage:index' %}";
+			
+			break;
+		case "add":
+			alert("添加成功！");
+			window.location.href = "{% url 'dl_manage:index' %}";
+			break;
+	}
+</script>

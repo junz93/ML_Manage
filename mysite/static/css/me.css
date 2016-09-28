@@ -1,0 +1,35 @@
+.header {
+	padding-top: 40px;
+	padding-bottom: 50px;
+	margin-bottom: 20px;
+	color: #eee;
+	background-color: #339;
+}
+
+.header h1 {
+	font-size: 40px;
+}
+
+#myTabContent {
+	margin-top: 30px;
+}
+
+.panel-body .panel-group {
+	margin: 5px auto;
+}
+
+.panel .panel-body {
+	padding: 10px 10px;
+}
+
+.panel .panel-body ul {
+	margin: 0;
+}
+
+ul.category li {
+	cursor: pointer;
+}
+
+label {
+	margin-right: 20px;
+}

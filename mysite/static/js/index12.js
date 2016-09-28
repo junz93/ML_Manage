@@ -1,0 +1,274 @@
+function validate_form(){
+    var $parent = $(this).closest(".form-group");
+    if($(this).is("[type='file']")){
+        $parent.removeClass("has-error");
+        $parent.children(".control-label").text("");
+        if($("#model_id").val() === "0"){
+            $(this).addClass("required");
+        }
+        else{
+            $(this).removeClass("required");
+        }
+    }
+
+    if($(this).hasClass("required")){
+        if($(this).val() == ""){
+            $parent.addClass("has-error");
+            $parent.children(".control-label").text("不能为空！");
+            return false;
+        }
+        else{
+            $parent.removeClass("has-error").addClass("has-success");
+            $parent.children(".control-label").text("");
+        }
+    }
+
+    if($(this).hasClass("number")){
+        if(isNaN($(this).val())){
+            $parent.addClass("has-error");
+            $parent.children(".control-label").text("请输入数字！");
+            return false;
+        }
+        else{
+            $parent.removeClass("has-error").addClass("has-success");
+            $parent.children(".control-label").text("");
+        }
+    }
+
+    if($(this).hasClass('numlist')){
+        if($(this).val() != ""){
+            var num_list = $(this).val().trim().split(" ");
+            for(var i = 0; i < num_list.length; i++){
+                if(isNaN(num_list[i])){
+                    $parent.addClass("has-error");
+                    $parent.children(".control-label").text("请输入正确格式！");
+                    return false;
+                }
+            }
+            $parent.removeClass("has-error").addClass("has-success");
+            $parent.children(".control-label").text("");
+        }
+    }
+    
+    return true;
+}
+
+$(document).ready(function(){
+    // validation for form before submission
+    $("form :input").blur(validate_form);
+
+    // validation for form when submitting
+    $("form").submit(function(){
+        $(this).find(':input').trigger("blur");
+        var numError = $(this).find(".has-error").length;
+        if(numError){
+            return false;
+        }
+        $("#add").prop("disabled", true).attr("value", "训练中……");
+    });
+
+    // load the type2 according to the selected type1
+    $("#typeSel1").change(function(event, type2){
+        var $sel2 = $("#typeSel2");
+        $sel2.empty();
+        $sel2.append("<option value=''></option>");
+        if(event.target.value === "")
+            return;
+
+        $.get("/manage/", {"type1": event.target.value}, function(data){
+            $.each(data, function(index, val){
+                $sel2.append("<option>" + val + "</option>");
+            });
+
+            if(typeof type2 != "undefined"){
+                $sel2.val(type2);
+                $sel2.trigger("blur");
+            }
+        }, "json");
+    });
+
+    // load the models of the corresponding type2
+    $("a.loadmodels").click(function(){
+        var typeid = $(this).attr("data-id");
+        var $panel_body = $(this).closest(".panel-heading").next().children(".panel-body");
+        if($panel_body.html() != ""){
+            return;
+        }
+
+        $.get("/manage/loadmodels/", {"type_id": typeid}, function(data){
+            if(data.length == 0){
+                $panel_body.html("None");
+                return;
+            }
+
+            var $list = $("<ul class='list-unstyled category'></ul>");
+            $.each(data, function(index, val){
+                var $item = $("<li>" + val.name +"</li>");
+                $item.attr('data-id', val.id);
+                $item.click(function(){
+                    var model_id = $(this).attr("data-id");
+                    $.get("/manage/fillmodel/", {"model_id": model_id, "query_type": "lite"}, function(data){
+                        $("#mId").val(data.id);
+                        $("#mName").val(data.model_name);
+                        $("#mIntro").val(data.introduction);
+                    });
+                });
+                $item.appendTo($list);
+            });
+            $list.appendTo($panel_body);
+        });
+    });
+
+    // single or batching for learning rate
+    var $lr1 = $("#lr");
+    var $lr2 = $("<div id='lr' class='row'></div>");
+    $lr2.append("<div class='col-md-4'><label class='sr-only' for='lr-begin'>初值</label>\
+        <input type='text' class='form-control required number' name='lr-begin' id='lr-begin' placeholder='初值'></div>");
+    $lr2.append("<div class='col-md-4'><label class='sr-only' for='lr-end'>终值</label>\
+        <input type='text' class='form-control required number' name='lr-end' id='lr-end' placeholder='终值'></div>");
+    $lr2.append("<div class='col-md-4'><label class='sr-only' for='lr-step'>步长</label>\
+        <input type='text' class='form-control required number' name='lr-step' id='lr-step' placeholder='步长'></div>");
+    $lr2.find(" :input").blur(validate_form);
+    $("[name='lrRadio']").click(function(){
+        $("#lr").detach();
+        var $parent = $(this).closest(".form-group");
+        if($("[name='lrRadio']:first").prop("checked")){
+            $parent.append($lr1);
+        }
+        else{
+            $parent.append($lr2);
+        }
+    });
+
+    // single or batching for the number of iterations
+    var $iter1 = $("#num_iter");
+    var $iter2 = $("<div id='num_iter' class='row'></div>");
+    $iter2.append("<div class='col-md-4'><label class='sr-only' for='iter-begin'>初值</label>\
+        <input type='text' class='form-control required number' name='iter-begin' id='iter-begin' placeholder='初值'></div>");
+    $iter2.append("<div class='col-md-4'><label class='sr-only' for='iter-end'>终值</label>\
+        <input type='text' class='form-control required number' name='iter-end' id='iter-end' placeholder='终值'></div>");
+    $iter2.append("<div class='col-md-4'><label class='sr-only' for='iter-step'>步长</label>\
+        <input type='text' class='form-control required number' name='iter-step' id='iter-step' placeholder='步长'></div>");
+    $iter2.find(" :input").blur(validate_form);
+    $("[name='iterRadio']").click(function(){
+        $("#num_iter").detach();
+        var $parent = $(this).closest(".form-group");
+        if($("[name='iterRadio']:first").prop("checked")){
+            $parent.append($iter1);
+        }
+        else{
+            $parent.append($iter2);
+        }
+    });
+
+    // single or batching for the number of a batch
+    var $batch1 = $("#num_batch");
+    var $batch2 = $("<div id='num_batch' class='row'></div>");
+    $batch2.append("<div class='col-md-4'><label class='sr-only' for='batch-begin'>初值</label>\
+        <input type='text' class='form-control required number' name='batch-begin' id='batch-begin' placeholder='初值'></div>");
+    $batch2.append("<div class='col-md-4'><label class='sr-only' for='batch-end'>终值</label>\
+        <input type='text' class='form-control required number' name='batch-end' id='batch-end' placeholder='终值'></div>");
+    $batch2.append("<div class='col-md-4'><label class='sr-only' for='batch-step'>步长</label>\
+        <input type='text' class='form-control required number' name='batch-step' id='batch-step' placeholder='步长'></div>");
+    $batch2.find(" :input").blur(validate_form);
+    $("[name='batchRadio']").click(function(){
+        $("#num_batch").detach();
+        var $parent = $(this).closest(".form-group");
+        if($("[name='batchRadio']:first").prop("checked")){
+            $parent.append($batch1);
+        }
+        else{
+            $parent.append($batch2);
+        }
+    });
+
+    // switch the type of data(text/file) when invoking a model
+    $("[name='dataRadio']").click(function(){
+        if($("[name='dataRadio']:first").prop("checked")){
+            $("#data").attr("type", "text");
+        }
+        else{
+            $("#data").attr("type", "file");
+        }
+    });
+
+    // switch the type of TypeName1 when creating a new type
+    var $tn1 = $("#newType1");
+    var $tn2 = $("<input type='text' class='form-control required' name='newType1' id='newType1'>");
+    $tn2.blur(validate_form);
+    $("[name='typeRadio']").click(function(){
+        $("#newType1").detach();
+        var $parent = $(this).closest(".form-group");
+        if($("[name='typeRadio']:first").prop("checked")){
+            $parent.append($tn1);
+        }
+        else{
+            $parent.append($tn2);
+        }
+    });
+
+    // modify an existing model
+    $("#modify").click(function(){
+        var model_id = $("#mId").val();
+        if(model_id == "0")
+            return;
+
+        $.get('/manage/fillmodel/', {"model_id": model_id, "query_type": "full"}, function(data){
+            $("#model_id").val(data.id);
+            $("#typeSel1").val(data.type1).triggerHandler('change', data.type2);
+            $("#model_name").val(data.model_name);
+            $("#num_layer").val(data.num_layer);
+            $("#num_unit").val(data.num_unit);
+            $("#lr").val(data.lr);
+            $("#d_in").val(data.d_in);
+            $("#d_out").val(data.d_out);
+            $("#comment").val(data.comment);
+            $("#Part1 form :input").trigger("blur");
+            $("#myTab a:first").tab("show");
+        });        
+    });
+   
+   // invoke a model
+   $("#invoke").click(function(){
+	var model_id = $("#mId").val();
+	var topic = $("#topic").val();
+	if(model_id == "0"){
+            alert("请选择要调用的模型！");
+            return;
+        }	
+	$.get('/manage/load/', {"model_id": model_id, "topic": topic}, function(data){
+	  window.open(location.protocol + "//" + location.host + "/manage/plot/" + model_id);
+ 	});    
+   });
+	
+    // plot
+    $("#plot").click(function(){
+	var model_id = $("#mId").val();
+	if(model_id == "0"){
+            alert("请选择要查看的模型！");
+            return;
+        }		
+      window.open(location.protocol + "//" + location.host + "/manage/plot/" + model_id);	    
+   });
+
+    // delete a model
+    $("#delete").click(function(){
+        var model_id = $("#mId").val();
+        if(model_id == "0"){
+            alert("请选择要删除的模型！");
+            return;
+        }
+
+        if(confirm("确认删除？")){
+            // $("#myTab a:end").tab("show");
+            $.get('/manage/delete/', {"model_id": model_id}, function(data){
+                if(data == "success"){
+                    alert("删除成功！");
+                    location.reload();
+                }
+                else
+                    alert("删除失败！");
+            });
+        }
+    });
+});
