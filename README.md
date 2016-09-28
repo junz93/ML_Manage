@@ -21,7 +21,7 @@ Open the README.txt file in the compressed file downloaded in step(3), and follo
 
 (5) Run this project.
 
-Open CMD, and change the current directory to the project directory. Type the following command:
+Open CMD and change the current directory to the project directory. Type the following command:
 
     python manage.py runserver 0.0.0.0:8000
     
@@ -44,7 +44,7 @@ Go to <a href="http://mxnet.readthedocs.io/en/latest/how_to/build.html#python-pa
 
 (5) Run this project.
 
-Open Terminal, and change the current directory to the project directory. Type the following command:
+Open Terminal and change the current directory to the project directory. Type the following command:
 
     python manage.py runserver 0.0.0.0:8000
     
