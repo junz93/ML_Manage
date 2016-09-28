@@ -19,7 +19,7 @@ Go to <a href="http://mxnet.readthedocs.io/en/latest/how_to/build.html#installin
 
 Open the README.txt file in the compressed file downloaded in step(3), and follow corresponding instructions.
 
-(5) Run this project.
+(5) Run it.
 
 Open CMD and change the current directory to the project directory. Type the following command:
 
@@ -42,7 +42,7 @@ Go to <a href="http://mxnet.readthedocs.io/en/latest/how_to/build.html#building-
 (4) Install the Python Package of MXNet.
 Go to <a href="http://mxnet.readthedocs.io/en/latest/how_to/build.html#python-package-installation">this page</a>. Follow the instructions in the "Python Package Installation" section.
 
-(5) Run this project.
+(5) Run it.
 
 Open Terminal and change the current directory to the project directory. Type the following command:
 
