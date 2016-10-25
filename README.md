@@ -1,6 +1,8 @@
 # ML_Manage
 This is a web-based management system that provides a user-friendly interface for users to manage a machine learning system. 
 
+It is developed based on <b>Python Django</b> (as the web framework) and <b>Bootstrap</b> (for front-end design). The background machine learning framework is <b>MXNet</b>.
+
 By using it, you can:
 * Train learning models by inputting the parameters and uploading the training data on the web page
 * Look up the existing models
