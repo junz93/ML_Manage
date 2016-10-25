@@ -1,7 +1,13 @@
-# dl_manage
-A web-based management system for a machine learning system.
+# ML_Manage
+This is a web-based management system that provides a user-friendly interface for users to manage a machine learning system. 
 
-## Usage:
+By using it, you can:
+* Train learning models by inputting the parameters and uploading the training data on the web page
+* Look up the existing models
+* Edit the models
+* Delete the models
+
+## Installation:
 ### 1. For Windows
 
 (1) Install Python.
