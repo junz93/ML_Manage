@@ -25,7 +25,7 @@ Go to <a href="http://mxnet.io/get_started/setup.html#build-mxnet-on-windows">th
 
 (4) Install the Python Package of MXNet
 
-Open the README.txt file in the compressed file downloaded in step(3), and follow corresponding instructions.
+Open the README.txt file in the compressed file downloaded in step (3), and follow corresponding instructions.
 
 (5) Run it
 
