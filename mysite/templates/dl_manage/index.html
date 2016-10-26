@@ -6,26 +6,26 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>机器学习管理系统</title>
+    <title>Machine Learning Management System</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
 </head>
 
 <body>
     <div class="header">
-        <div class="container"><h1>机器学习管理系统</h1></div>
+        <div class="container"><h1>Machine Learning Management System</h1></div>
     </div>
 
     <div class="container">
     <ul id="myTab" class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
-            <a href="#Part1" aria-controls="Part1" role="tab" data-toggle="tab">添加新模型</a>
+            <a href="#Part1" aria-controls="Part1" role="tab" data-toggle="tab">Add model</a>
         </li>
         <li role="presentation">
-            <a href="#Part2" aria-controls="Part2" role="tab" data-toggle="tab">模型管理</a>
+            <a href="#Part2" aria-controls="Part2" role="tab" data-toggle="tab">Model Manage</a>
         </li>
         <li role="presentation">
-            <a href="#Part3" aria-controls="Part3" role="tab" data-toggle="tab">数据管理</a>
+            <a href="#Part3" aria-controls="Part3" role="tab" data-toggle="tab">Data Manage</a>
         </li>
     </ul>
     </div>
@@ -38,9 +38,9 @@
                 {% csrf_token %}
                 <input type="hidden" name="model_id" id="model_id" value="0">
                 <div class="form-group">
-                    <label for="typeSel1">一级分类</label>
+                    <label for="typeSel1">Type 1</label>
                     <label for="typeSel1">
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">新建分类</button>
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">New Type</button>
                     </label>
                     <label for="typeSel1" class="control-label"></label>
                     <select id="typeSel1" name="typeSel1" class="form-control required">
@@ -51,80 +51,80 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="typeSel2">二级分类</label>
+                    <label for="typeSel2">Type 2</label>
                     <label for="typeSel2" class="control-label"></label>
                     <select id="typeSel2" name="typeSel2" class="form-control required">
                         <option value=""></option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="model_name">模型名称</label>
+                    <label for="model_name">Name</label>
                     <label for="model_name" class="control-label"></label>
                     <input type="text" id="model_name" name="model_name" class="form-control required">
                 </div>
                 <input type="hidden" name="num_network" id="num_network" value="1">
                 <div class="form-group">
-                    <label for="num_layer1">网络层数</label>
+                    <label for="num_layer1">Number of layers</label>
                     <label>
-                        <button type="button" id="newNetwork" class="btn btn-success btn-sm">添加新网络</button>
+                        <button type="button" id="newNetwork" class="btn btn-success btn-sm">Add new network</button>
                     </label>
                     <label for="num_layer1" class="control-label"></label>
                     <input type="text" id="num_layer1" name="num_layer1" class="form-control required number">
                 </div>
                 <div class="form-group">
-                    <label for="num_unit1">各层神经元个数（用空格分隔）</label>
+                    <label for="num_unit1">Number of units in each layer（seperate by space）</label>
                     <label for="num_unit1" class="control-label"></label>
                     <input type="text" id="num_unit1" name="num_unit1" class="form-control required numlist">
                 </div>
                 <div class="form-group">
-                    <label for="lr">学习率</label>
+                    <label for="lr">Leraning rate</label>
                     <label class="radio-inline">
-                        <input type="radio" name="lrRadio" value="lr1" checked>单次
+                        <input type="radio" name="lrRadio" value="lr1" checked>Single
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="lrRadio" value="lr2">批量
+                        <input type="radio" name="lrRadio" value="lr2">Batch
                     </label>
                     <label for="lr" class="control-label"></label>
                     <input type="text" id="lr" name="lr" class="form-control required number">
                 </div>
                 <div class="form-group">
-                    <label for="loss">目标错误率</label>
+                    <label for="loss">Error rate</label>
                     <label for="loss" class="control-label"></label>
                     <input type="text" id="loss" name="loss" class="form-control required number">
                 </div>
                 <div class="form-group">
-                    <label for="max_iter">最大迭代次数</label>
+                    <label for="max_iter">Maximum number of iterations</label>
                     <label for="max_iter" class="control-label"></label>
                     <input type="text" id="max_iter" name="max_iter" class="form-control required number">
                 </div>
                 <div class="form-group">
-                    <label for="num_batch">Batch</label>
+                    <label for="num_batch">Batch size</label>
                     <label class="radio-inline">
-                        <input type="radio" name="batchRadio" value="batch1" checked>单次
+                        <input type="radio" name="batchRadio" value="batch1" checked>Single
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="batchRadio" value="batch2">批量
+                        <input type="radio" name="batchRadio" value="batch2">Batch
                     </label>
                     <label for="num_batch" class="control-label"></label>
                     <input type="text" id="num_batch" name="num_batch" class="form-control required number">
                 </div>
                 <div class="form-group">
-                    <label for="d_in">特征个数</label>
+                    <label for="d_in">Number of features</label>
                     <label for="d_in" class="control-label"></label>
                     <input type="text" id="d_in" name="d_in" class="form-control required number">
                 </div>
                 <div class="form-group">
-                    <label for="d_out">结果个数</label>
+                    <label for="d_out">Number of </label>
                     <label for="d_out" class="control-label"></label>
                     <input type="text" id="d_out" name="d_out" class="form-control required number">
                 </div>
                 <div class="form-group">
-                    <label for="file_data">数据</label>
+                    <label for="file_data">Data</label>
                     <label class="radio-inline">
-                        <input type="radio" name="fileRadio" value="file1" checked>选择
+                        <input type="radio" name="fileRadio" value="file1" checked>Select from the list
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="fileRadio" value="file2">上传
+                        <input type="radio" name="fileRadio" value="file2">Upload
                     </label>
                     <label for="file_data" class="control-label"></label>
                     <select id="file_data" name="file_data" class="form-control required">
@@ -135,14 +135,14 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="comment">备注</label>
+                    <label for="comment">Comments</label>
                     <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
                 </div>
                 <span style="margin-right: 20px">
-                    <input type="submit" id="add" name="add" value="提交" class="btn btn-primary">
+                    <input type="submit" id="add" name="add" value="Submit" class="btn btn-primary">
                 </span>
                 <span style="margin-right: 20px">
-                    <input type="reset" value="重置" class="btn btn-primary">
+                    <input type="reset" value="Reset" class="btn btn-primary">
                 </span>
             </form><br />
         </div>  <!-- Tab 1 -->
@@ -189,15 +189,15 @@
             <form>
                 <input type="hidden" name="mId" id="mId" value="0">
                 <div class="form-group">
-                    <label for="mName">模型名称</label>
+                    <label for="mName">Name</label>
                     <input type="text" class="form-control" name="mName" id="mName" disabled>
                 </div>
                 <div class="form-group">
-                    <label for="mIntro">模型简述</label>
+                    <label for="mIntro">Description</label>
                     <textarea class="form-control" rows="10" name="mIntro" id="mIntro" disabled></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="sub">订阅数据主题</label>
+                    <label for="sub">Subscribe to data theme</label>
                     <label for="sub" class="control-label"></label>
                     <select id="sub" name="sub" class="form-control required">
 			{% for sub_topic in sub_topic_set %}
@@ -206,7 +206,7 @@
                     </select>
                 </div>
 		<div class="form-group">
-                    <label for="pub">发布数据主题</label>
+                    <label for="pub">Post data theme</label>
                     <label for="pub" class="control-label"></label>
                     <select id="pub" name="pub" class="form-control required">
                         {% for pub_topic in pub_topic_set %}
@@ -217,12 +217,12 @@
 		<div style="margin:20px">
 	        </div>
                 <span style="margin-right:20px">
-                <input type="button" class="btn btn-primary" name="invoke" id="invoke" value="调用">
+                <input type="button" class="btn btn-primary" name="invoke" id="invoke" value="Invoke">
                 </span>
                 <span style="margin-right:20px">
-                <input type="button" class="btn btn-primary" name="modify" id="modify" value="修改">
+                <input type="button" class="btn btn-primary" name="modify" id="modify" value="Edit">
                 </span>
-                <input type="button" class="btn btn-primary" name="delete" id="delete_model" value="删除">
+                <input type="button" class="btn btn-primary" name="delete" id="delete_model" value="Delete">
             </form><br />
             </div>
             </div><!-- row -->
@@ -233,7 +233,7 @@
             <div class="col-md-3">
                 <div class="panel panel-primary data-list">
                     <div class="panel-heading" role="tab">
-                        <h4 class="panel-title">数据文件</h4>
+                        <h4 class="panel-title">Data files</h4>
                     </div>
                     <div class="panel-body">
                         <ul class="list-unstyled category">
@@ -248,18 +248,18 @@
                 <form>
                     <input type="hidden" id="data_id" name="data_id" value="0">
                     <div class="form-group">
-                        <label for="data_name">数据名称</label>
+                        <label for="data_name">Name</label>
                         <input type="text" class="form-control" id="data_name" name="data_name" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="data_in">特征个数</label>
+                        <label for="data_in">Number of features</label>
                         <input type="text" class="form-control" id="data_in" name="data_in" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="data_out">结果个数</label>
+                        <label for="data_out">Number of targets</label>
                         <input type="text" class="form-control" id="data_out" name="data_out" disabled>
                     </div>
-                    <input type="button" class="btn btn-primary" id="delete_data" value="删除">
+                    <input type="button" class="btn btn-primary" id="delete_data" value="Delete">
                 </form>
             </div>
             </div>
@@ -274,18 +274,18 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">新建分类</h4>
+                    <h4 class="modal-title" id="myModalLabel">New Type</h4>
                 </div>
                 <form action="{% url 'dl_manage:index' %}" method="post">
                 {% csrf_token %}
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="newType1">一级分类</label>
+                        <label for="newType1">Type 1</label>
                         <label class="radio-inline">
-                            <input type="radio" name="typeRadio" value="type1" checked>选择
+                            <input type="radio" name="typeRadio" value="type1" checked>Select an existing type1
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="typeRadio" value="type2">新建
+                            <input type="radio" name="typeRadio" value="type2">Create a new type1
                         </label>
                         <label for="newType1" class="control-label"></label>
                         <select id="newType1" name="newType1" class="form-control required">
@@ -296,14 +296,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="newType2">二级分类</label>
+                        <label for="newType2">Type 2</label>
                         <label for="newType2" class="control-label"></label>
                         <input type="text" id="newType2" name="newType2" class="form-control required">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="关闭">
-                    <input type="submit" class="btn btn-primary" name="add_type" value="提交">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Close">
+                    <input type="submit" class="btn btn-primary" name="add_type" value="Submit">
                 </div>
                 </form>
             </div>
