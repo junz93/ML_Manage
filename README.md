@@ -31,6 +31,7 @@ Open the README.txt file in the compressed file downloaded in step (3), and foll
 
 Open CMD and change the current directory to the project directory. Type the following command:
 
+    cd mysite
     python manage.py runserver 0.0.0.0:8000
     
 Then, open a browser. Type `localhost:8000/manage` and press Enter.
@@ -54,6 +55,7 @@ Go to <a href="http://mxnet.io/get_started/setup.html#install-the-mxnet-package-
 
 Open Terminal and change the current directory to the project directory. Type the following command:
 
+    cd mysite
     python manage.py runserver 0.0.0.0:8000
     
 Then, open a browser. Type `localhost:8000/manage` and press Enter.
